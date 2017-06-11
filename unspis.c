@@ -93,7 +93,7 @@ int main(int argc, char **argv)
     static char path[_MAX_PATH], buf[BUFSIZ];
     char *name;
     int count;
-    long sum, key = MAGIC, total, xorbuf, i,
+    int sum, key = MAGIC, total, xorbuf, i,
 	stored = 0, compressed = 0, failed = 0, unknown = 0;
     struct TCompressHeader mainHdr;
     struct TCompressedFileHeader hdr;
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 	error(argv[1]);
     if (fread(&mainHdr, sizeof(mainHdr), 1, archive) != 1)
 	error(argv[1]);
-    if (strncmp(mainHdr.ComId, "SPIS\032", 5)) {
+    if (strncmp(mainHdr.ComId, "SPIS\032", 5) || strncmp(mainHdr.ComId, "SPIS", 4)) {
 	printf("\"%s\" is not a SPIS archive\n", argv[1]);
 	exit(EBADF);
     }
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 	    if ((infile = tmpfile()) == NULL)
 		error("tmpfile");
 	    for (total = 0; total < hdr.CompressedSize; total += count) {
-		count = (int)min(sizeof(long), hdr.CompressedSize - total);
+		count = (int)min(sizeof(int), hdr.CompressedSize - total);
 		fread(&xorbuf, count, 1, archive);
 		if (ferror(archive))
 		    error(argv[1]);

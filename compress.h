@@ -26,10 +26,10 @@ enum TCompressionMethod {
 struct TCompressHeader {
     char ComId[5];	/* Always SPIS + chr(26) */
     char ComMethodId[3];/* RLE, LZH, NON, CUS/user-defined */
-    long Fullsize;	/* excl. header, not used for caMulti*/
+    int Fullsize;	/* excl. header, not used for caMulti*/
     char ArchiveType;	/* caSingle, caMulti */
-    long Checksum;	/* checksum value, not used for caMulti */
-    long Locked;	/* 1 if file has been locked (V3.05 or earlier), */
+    int Checksum;	/* checksum value, not used for caMulti */
+    int Locked;	/* 1 if file has been locked (V3.05 or earlier), */
 };			/* 2 if encrypted (V3.5 or later), otherwise 0 */
 
 /*
@@ -37,20 +37,20 @@ struct TCompressHeader {
  * repeats of this header, each followed by its filename and then its
  * compressed file data.
  *
- * The filename is max 255 characters long, and is always stored with no
+ * The filename is max 255 characters int, and is always stored with no
  * drive letter (although a path may be stored if desired).
  *
  * Note that compressedMode can vary from file to file in a single archive.
  */
 struct TCompressedFileHeader {
     short FileNameLength;/* filename itself immediately follows this header */
-    long Datetime;	/* original file date and time (in MS-DOS format) */
+    int Datetime;	/* original file date and time (in MS-DOS format) */
     short Attributes;	/* original file attributes (again MS-DOS --L.G.) */
-    long Fullsize;	/* original file size */
-    long CompressedSize;/* size of compressed copy of the file */
+    int Fullsize;	/* original file size */
+    int CompressedSize;/* size of compressed copy of the file */
     char CompressedMode;/* how compressed */
-    long Checksum;	/* checksum value of original file, 0 if coNone (?!) */
-    long Locked;	/* 1 if file has been locked (V3.05 or earlier), */
+    int Checksum;	/* checksum value of original file, 0 if coNone (?!) */
+    int Locked;	/* 1 if file has been locked (V3.05 or earlier), */
 };			/* 2 if encrypted (V3.5 or later), otherwise 0 */
 
 /******************************************************************************
