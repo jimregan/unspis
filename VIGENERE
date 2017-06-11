@@ -1,0 +1,28 @@
+8.2. How do I break a Vigenere (repeated-key) cipher?
+
+  A repeated-key cipher, where the ciphertext is something like the
+  plaintext xor KEYKEYKEYKEY (and so on), is called a Vigenere cipher.
+  If the key is not too long and the plaintext is in English, do the
+  following:
+
+  1. Discover the length of the key by counting coincidences.
+  (See Gaines [GAI44], Sinkov [SIN66].) Trying each displacement of
+  the ciphertext against itself, count those bytes which are equal.
+  If the two ciphertext portions have used the same key, something
+  over 6% of the bytes will be equal. If they have used different
+  keys, then less than 0.4% will be equal (assuming random 8-bit bytes
+  of key covering normal ASCII text). The smallest displacement which
+  indicates an equal key is the length of the repeated key.
+
+  2. Shift the text by that length and XOR it with itself. This
+  removes the key and leaves you with text XORed with itself. Since
+  English has about 1 bit of real information per byte, 2 streams of
+  text XORed together has 2 bits of info per 8-bit byte, providing
+  plenty of redundancy for choosing a unique decryption. (And in fact
+  one stream of text XORed with itself has just 1 bit per byte.)
+
+  If the key is short, it might be even easier to treat this as a
+  standard polyalphabetic substitution. All the old cryptanalysis
+  texts show how to break those. It's possible with those methods, in
+  the hands of an expert, if there's only ten times as much text as key.
+  See, for example, Gaines [GAI44], Sinkov [SIN66].

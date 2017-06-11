@@ -1,0 +1,9 @@
+CONTENTS   - the file you're reading now
+COPYING    - the GNU General Public License for distribution of this package
+LZHUF      - lzhuf algorithms background by Haruhiko Okumura
+Makefile   - builds the program in Linux or MS-DOS®, via GNU, Borland or MS C
+READTHIS   - a brief description of this package (aka "file_id.diz")
+VEGENERE   - how to decrypt Vigenere ciphers (from the Encryption Usenet FAQ)
+compress.h - SPIS TCompress structure definitions by its author Peter Hyde
+lzhuf.c    - the Lempel-Ziv-Huffman [de]compressor by Haruyasu Yoshizaki
+unspis.c   - the UNSPIS SPIS LZH de-archiver by Luchezar Georgiev (that's me)
